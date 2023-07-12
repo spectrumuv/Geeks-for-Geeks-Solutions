@@ -1,0 +1,61 @@
+class Solution
+{
+    public:
+    /*You are required to complete this method*/
+    int findK(int a[MAX][MAX],int n,int m,int k)
+    {
+ 		// Your code goes here.
+ 		int top = 0;
+        int bottom = n - 1;
+        int left = 0;
+        int right = m - 1;
+        vector<int> spiral_order;
+        while(spiral_order.size()<n*m)
+        {
+            
+            for (int i = left; i <= right; i++) 
+            {
+                spiral_order.push_back(a[top][i]);
+            }
+            top++;
+
+            if (spiral_order.size() == n * m) 
+            {
+            break;
+            }
+
+            // Traverse from top to bottom
+            for (int i = top; i <= bottom; i++) 
+            {
+                spiral_order.push_back(a[i][right]);
+            }
+            right--;
+
+            if (spiral_order.size() == n * m) 
+            {
+                break;
+            }
+
+            // Traverse from right to left
+            for (int i = right; i >= left; i--) 
+            {
+                spiral_order.push_back(a[bottom][i]);
+            }
+            bottom--;
+
+            if (spiral_order.size() == n * m) 
+            {
+                break;
+            }
+
+            // Traverse from bottom to top
+            for (int i = bottom; i >= top; i--) 
+            {
+                spiral_order.push_back(a[i][left]);
+            }
+            left++;
+        }
+
+        return spiral_order[k - 1];
+    }
+};
